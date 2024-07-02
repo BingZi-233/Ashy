@@ -61,7 +61,7 @@ entity Plugin {
     /**
      * 版本
      */
-    version String required minlength(3) maxlength(50) pattern(/^[0-9]+\.[0-9]+\.[0-9]+$/)
+    version String required minlength(3) maxlength(50) pattern(/^[0-9]+\.[0-9]+/)
     /**
      * 许可证
      */
