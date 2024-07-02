@@ -2,7 +2,7 @@ application {
   config {
     applicationType monolith
     baseName ashy
-    packageName online.BingZi-233.ashy
+    packageName online.bingzi.ashy
     authenticationType oauth2
     serverPort 8080
     clientFramework vue
