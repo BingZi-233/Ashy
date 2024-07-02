@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/AshyGateway/pom.xml" />
+        <option value="$PROJECT_DIR$/AshySubscription/pom.xml" />
+        <option value="$PROJECT_DIR$/AshyUser/pom.xml" />
+        <option value="$PROJECT_DIR$/AshyCommodity/pom.xml" />
+        <option value="$PROJECT_DIR$/AshyResource/pom.xml" />
+        <option value="$PROJECT_DIR$/AshyValidate/pom.xml" />
+        <option value="$PROJECT_DIR$/AshyOrders/pom.xml" />
+        <option value="$PROJECT_DIR$/AshyPayment/pom.xml" />
+        <option value="$PROJECT_DIR$/AshyPlugin/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/AshyCommodity/pom.xml" />
+        <option value="$PROJECT_DIR$/AshyGateway/pom.xml" />
+        <option value="$PROJECT_DIR$/AshyOrders/pom.xml" />
+        <option value="$PROJECT_DIR$/AshyPayment/pom.xml" />
+        <option value="$PROJECT_DIR$/AshyPlugin/pom.xml" />
+        <option value="$PROJECT_DIR$/AshyResource/pom.xml" />
+        <option value="$PROJECT_DIR$/AshySubscription/pom.xml" />
+        <option value="$PROJECT_DIR$/AshyUser/pom.xml" />
+        <option value="$PROJECT_DIR$/AshyValidate/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="corretto-17" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
