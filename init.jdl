@@ -1,18 +1,18 @@
 application {
-  config {
-    applicationType monolith
-    baseName ashy
-    packageName online.bingzi.ashy
-    authenticationType oauth2
-    serverPort 8080
-    clientFramework vue
-    languages [zh-cn]
-    devDatabaseType h2Memory
-    prodDatabaseType postgresql
-    cacheProvider caffeine
-    enableHibernateCache true
-  }
-  entities *
+    config {
+        applicationType monolith
+        baseName ashy
+        packageName online.bingzi.ashy
+        authenticationType oauth2
+        serverPort 8080
+        clientFramework vue
+        languages [zh-cn, zh-tw]
+        devDatabaseType h2Memory
+        prodDatabaseType postgresql
+        cacheProvider caffeine
+        enableHibernateCache true
+    }
+    entities *
 }
 
 /**
@@ -22,18 +22,18 @@ application {
  * @date 2024-07-02
  */
 entity ApplicationUser {
-  /**
-   * ID
-   */
-  id UUID required unique
-  /**
-   * 名字
-   */
-  username String required minlength(3) maxlength(50)
-  /**
-   * 头像URL
-   */
-  avatarUrl String
+    /**
+     * ID
+     */
+    id UUID required unique
+    /**
+     * 名字
+     */
+    username String required minlength(3) maxlength(50)
+    /**
+     * 头像URL
+     */
+    avatarUrl String
 }
 
 /**
@@ -43,26 +43,26 @@ entity ApplicationUser {
  * @date 2024-07-02
  */
 entity Plugin {
-  /**
-   * ID
-   */
-  id UUID required unique
-  /**
-   * 插件名称
-   */
-  name String required minlength(3) maxlength(50) pattern(/^[a-zA-Z0-9_-]+$/)
-  /**
-   * 描述
-   */
-  description String required minlength(3) maxlength(50)
-  /**
-   * 版本
-   */
-  version String required minlength(3) maxlength(50) pattern(/^[0-9]+\.[0-9]+\.[0-9]+$/)
-  /**
-   * 许可证
-   */
-  license License required
+    /**
+     * ID
+     */
+    id UUID required unique
+    /**
+     * 插件名称
+     */
+    name String required minlength(3) maxlength(50) pattern(/^[a-zA-Z0-9_-]+$/)
+    /**
+     * 描述
+     */
+    description String required minlength(3) maxlength(50)
+    /**
+     * 版本
+     */
+    version String required minlength(3) maxlength(50) pattern(/^[0-9]+\.[0-9]+\.[0-9]+$/)
+    /**
+     * 许可证
+     */
+    license License required
 }
 
 /**
@@ -72,18 +72,18 @@ entity Plugin {
  * @date 2024-07-02
  */
 enum License {
-  MIT,
-  Apache,
-  GPL,
-  BSD,
-  LGPL,
-  AGPL,
-  CC0,
-  Mozilla,
-  Eclipse,
-  MPL,
-  Unlicense,
-  Other
+    MIT,
+    Apache,
+    GPL,
+    BSD,
+    LGPL,
+    AGPL,
+    CC0,
+    Mozilla,
+    Eclipse,
+    MPL,
+    Unlicense,
+    Other
 }
 
 /**
@@ -93,30 +93,30 @@ enum License {
  * @date 2024-07-02
  */
 entity Commodity {
-  /**
-   * ID
-   */
-  id UUID required unique
-  /**
-   * 标题
-   */
-  title String required minlength(3) maxlength(50)
-  /**
-   * 价格
-   */
-  price BigDecimal required min(0)
-  /**
-   * 描述
-   */
-  description String required minlength(3) maxlength(50)
-  /**
-   * LOGO
-   */
-  logoImageUrl String
-  /**
-   * 内容（Markdown格式）
-   */
-  content String
+    /**
+     * ID
+     */
+    id UUID required unique
+    /**
+     * 标题
+     */
+    title String required minlength(3) maxlength(50)
+    /**
+     * 价格
+     */
+    price BigDecimal required min(0)
+    /**
+     * 描述
+     */
+    description String required minlength(3) maxlength(50)
+    /**
+     * LOGO
+     */
+    logoImageUrl String
+    /**
+     * 内容（Markdown格式）
+     */
+    content String
 }
 
 /**
@@ -126,18 +126,18 @@ entity Commodity {
  * @date 2024-07-02
  */
 entity Orders {
-  /**
-   * ID
-   */
-  id UUID required unique
-  /**
-   * 创建时间
-   */
-  createdAt ZonedDateTime required
-  /**
-   * 更新时间
-   */
-  updatedAt ZonedDateTime required
+    /**
+     * ID
+     */
+    id UUID required unique
+    /**
+     * 创建时间
+     */
+    createdAt ZonedDateTime required
+    /**
+     * 更新时间
+     */
+    updatedAt ZonedDateTime required
 }
 
 
@@ -148,22 +148,22 @@ entity Orders {
  * @date 2024-07-02
  */
 entity Payment {
-  /**
-   * ID
-   */
-  id UUID required unique
-  /**
-   * 订单金额
-   */
-  amount BigDecimal required min(0)
-  /**
-   * 支付方式
-   */
-  paymentMethod PaymentMethod required
-  /**
-   * 支付状态
-   */
-  paymentStatus PaymentStatus required
+    /**
+     * ID
+     */
+    id UUID required unique
+    /**
+     * 订单金额
+     */
+    amount BigDecimal required min(0)
+    /**
+     * 支付方式
+     */
+    paymentMethod PaymentMethod required
+    /**
+     * 支付状态
+     */
+    paymentStatus PaymentStatus required
 }
 
 /**
@@ -173,18 +173,18 @@ entity Payment {
  * @date 2024-07-02
  */
 enum PaymentMethod {
-  /**
-   * 支付宝
-   */
-  ALIPAY("支付宝支付"),
-  /**
-   * 微信支付
-   */
-  WECHATPAY("微信支付"),
-  /**
-   * Apple Pay
-   */
-  APPLEPAY("Apple支付")
+    /**
+     * 支付宝
+     */
+    ALIPAY("支付宝支付"),
+    /**
+     * 微信支付
+     */
+    WECHATPAY("微信支付"),
+    /**
+     * Apple Pay
+     */
+    APPLEPAY("Apple支付")
 }
 
 /**
@@ -194,26 +194,26 @@ enum PaymentMethod {
  * @date 2024-07-02
  */
 enum PaymentStatus {
-  /**
-   * 待支付
-   */
-  PENDING("待支付"),
-  /**
-   * 支付成功
-   */
-  SUCCESS("支付成功"),
-  /**
-   * 支付失败
-   */
-  FAILED("支付失败"),
-  /**
-   * 已取消
-   */
-  CANCELED("已取消"),
-  /**
-   * 已退款
-   */
-  REFUNDED("已退款")
+    /**
+     * 待支付
+     */
+    PENDING("待支付"),
+    /**
+     * 支付成功
+     */
+    SUCCESS("支付成功"),
+    /**
+     * 支付失败
+     */
+    FAILED("支付失败"),
+    /**
+     * 已取消
+     */
+    CANCELED("已取消"),
+    /**
+     * 已退款
+     */
+    REFUNDED("已退款")
 }
 
 /**
@@ -223,26 +223,26 @@ enum PaymentStatus {
  * @date 2024-07-02
  */
 entity AuthorizationCertificate {
-  /**
-   * ID
-   */
-  id UUID required
-  /**
-   * 授权状态
-   */
-  authorizationStatus AuthorizationStatus required
-  /**
-   * 加密方式
-   */
-  encryptionMethod EncryptionMethod required
-  /**
-   * 公钥
-   */
-  publicKey String required minlength(2048)
-  /**
-   * 私钥
-   */
-  privateKey String required minlength(2048)
+    /**
+     * ID
+     */
+    id UUID required
+    /**
+     * 授权状态
+     */
+    authorizationStatus AuthorizationStatus required
+    /**
+     * 加密方式
+     */
+    encryptionMethod EncryptionMethod required
+    /**
+     * 公钥
+     */
+    publicKey String required minlength(2048)
+    /**
+     * 私钥
+     */
+    privateKey String required minlength(2048)
 }
 
 /**
@@ -252,18 +252,18 @@ entity AuthorizationCertificate {
  * @date 2024-07-02
  */
 enum AuthorizationStatus {
-  /**
-   * 正常
-   */
-  NORMAL("正常"),
-  /**
-   * 禁用
-   */
-  DISABLED("禁用"),
-  /**
-   * 封禁
-   */
-  BANNED("封禁")
+    /**
+     * 正常
+     */
+    NORMAL("正常"),
+    /**
+     * 禁用
+     */
+    DISABLED("禁用"),
+    /**
+     * 封禁
+     */
+    BANNED("封禁")
 }
 
 /**
@@ -273,25 +273,25 @@ enum AuthorizationStatus {
  * @date 2024-07-02
  */
 enum EncryptionMethod {
-  /**
-   * RSA
-   */
-  RSA("RSA"),
-  /**
-   * AES
-   */
-  AES("AES")
+    /**
+     * RSA
+     */
+    RSA("RSA"),
+    /**
+     * AES
+     */
+    AES("AES")
 }
 
 relationship OneToOne {
-  ApplicationUser{internalUser(login)} to User with builtInEntity
-  Commodity{plugin(id)} to Plugin{commodity(id)}
-  Orders{payment(id)} to Payment{orders(id)}
-  AuthorizationCertificate{orders(id)} to Orders{authorizationCertificate(id)}
+    ApplicationUser{internalUser(login)} to User with builtInEntity
+    Commodity{plugin(id)} to Plugin{commodity(id)}
+    Orders{payment(id)} to Payment{orders(id)}
+    AuthorizationCertificate{orders(id)} to Orders{authorizationCertificate(id)}
 }
 
 relationship ManyToOne {
-  Plugin{applicationUser(username)} to ApplicationUser
-  Payment{commodity(id)} to Commodity
-  Orders{commodity(id)} to Commodity
+    Plugin{applicationUser(username)} to ApplicationUser
+    Payment{commodity(id)} to Commodity
+    Orders{commodity(id)} to Commodity
 }
