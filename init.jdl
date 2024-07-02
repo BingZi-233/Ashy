@@ -20,6 +20,10 @@ application {
  * @author BingZi-233
  * @date 2024-07-02
  */
+@filter
+@dto(mapstruct)
+@service(serviceImpl)
+@paginate(pagination)
 entity ApplicationUser {
     /**
      * ID
