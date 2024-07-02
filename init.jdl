@@ -1,0 +1,297 @@
+application {
+  config {
+    applicationType monolith
+    baseName ashy
+    packageName online.BingZi-233.ashy
+    authenticationType oauth2
+    serverPort 8080
+    clientFramework vue
+    languages [zh-cn]
+    devDatabaseType h2Memory
+    prodDatabaseType postgresql
+    cacheProvider caffeine
+    enableHibernateCache true
+  }
+  entities *
+}
+
+/**
+ * 用户
+ *
+ * @author BingZi-233
+ * @date 2024-07-02
+ */
+entity ApplicationUser {
+  /**
+   * ID
+   */
+  id UUID required unique
+  /**
+   * 名字
+   */
+  username String required minlength(3) maxlength(50)
+  /**
+   * 头像URL
+   */
+  avatarUrl String
+}
+
+/**
+ * 插件
+ *
+ * @author BingZi-233
+ * @date 2024-07-02
+ */
+entity Plugin {
+  /**
+   * ID
+   */
+  id UUID required unique
+  /**
+   * 插件名称
+   */
+  name String required minlength(3) maxlength(50) pattern(/^[a-zA-Z0-9_-]+$/)
+  /**
+   * 描述
+   */
+  description String required minlength(3) maxlength(50)
+  /**
+   * 版本
+   */
+  version String required minlength(3) maxlength(50) pattern(/^[0-9]+\.[0-9]+\.[0-9]+$/)
+  /**
+   * 许可证
+   */
+  license License required
+}
+
+/**
+ * 许可证
+ *
+ * @author BingZi-233
+ * @date 2024-07-02
+ */
+enum License {
+  MIT,
+  Apache,
+  GPL,
+  BSD,
+  LGPL,
+  AGPL,
+  CC0,
+  Mozilla,
+  Eclipse,
+  MPL,
+  Unlicense,
+  Other
+}
+
+/**
+ * 商品
+ *
+ * @author BingZi-233
+ * @date 2024-07-02
+ */
+entity Commodity {
+  /**
+   * ID
+   */
+  id UUID required unique
+  /**
+   * 标题
+   */
+  title String required minlength(3) maxlength(50)
+  /**
+   * 价格
+   */
+  price BigDecimal required min(0)
+  /**
+   * 描述
+   */
+  description String required minlength(3) maxlength(50)
+  /**
+   * LOGO
+   */
+  logoImageUrl String
+  /**
+   * 内容（Markdown格式）
+   */
+  content String
+}
+
+/**
+ * 订单
+ *
+ * @author BingZi-233
+ * @date 2024-07-02
+ */
+entity Orders {
+  /**
+   * ID
+   */
+  id UUID required unique
+  /**
+   * 创建时间
+   */
+  createdAt ZonedDateTime required
+  /**
+   * 更新时间
+   */
+  updatedAt ZonedDateTime required
+}
+
+
+/**
+ * 支付
+ *
+ * @author BingZi-233
+ * @date 2024-07-02
+ */
+entity Payment {
+  /**
+   * ID
+   */
+  id UUID required unique
+  /**
+   * 订单金额
+   */
+  amount BigDecimal required min(0)
+  /**
+   * 支付方式
+   */
+  paymentMethod PaymentMethod required
+  /**
+   * 支付状态
+   */
+  paymentStatus PaymentStatus required
+}
+
+/**
+ * 支付方式
+ *
+ * @author BingZi-233
+ * @date 2024-07-02
+ */
+enum PaymentMethod {
+  /**
+   * 支付宝
+   */
+  ALIPAY("支付宝支付"),
+  /**
+   * 微信支付
+   */
+  WECHATPAY("微信支付"),
+  /**
+   * Apple Pay
+   */
+  APPLEPAY("Apple支付")
+}
+
+/**
+ * 支付状态
+ *
+ * @author BingZi-233
+ * @date 2024-07-02
+ */
+enum PaymentStatus {
+  /**
+   * 待支付
+   */
+  PENDING("待支付"),
+  /**
+   * 支付成功
+   */
+  SUCCESS("支付成功"),
+  /**
+   * 支付失败
+   */
+  FAILED("支付失败"),
+  /**
+   * 已取消
+   */
+  CANCELED("已取消"),
+  /**
+   * 已退款
+   */
+  REFUNDED("已退款")
+}
+
+/**
+  * 授权证书
+ *
+ * @author BingZi-233
+ * @date 2024-07-02
+ */
+entity AuthorizationCertificate {
+  /**
+   * ID
+   */
+  id UUID required
+  /**
+   * 授权状态
+   */
+  authorizationStatus AuthorizationStatus required
+  /**
+   * 加密方式
+   */
+  encryptionMethod EncryptionMethod required
+  /**
+   * 公钥
+   */
+  publicKey String required minlength(2048)
+  /**
+   * 私钥
+   */
+  privateKey String required minlength(2048)
+}
+
+/**
+ * 授权状态
+ *
+ * @author BingZi-233
+ * @date 2024-07-02
+ */
+enum AuthorizationStatus {
+  /**
+   * 正常
+   */
+  NORMAL("正常"),
+  /**
+   * 禁用
+   */
+  DISABLED("禁用"),
+  /**
+   * 封禁
+   */
+  BANNED("封禁")
+}
+
+/**
+ * 加密方式
+ *
+ * @author BingZi-233
+ * @date 2024-07-02
+ */
+enum EncryptionMethod {
+  /**
+   * RSA
+   */
+  RSA("RSA"),
+  /**
+   * AES
+   */
+  AES("AES")
+}
+
+relationship OneToOne {
+  ApplicationUser{internalUser(login)} to User with builtInEntity
+  Commodity{plugin(id)} to Plugin{commodity(id)}
+  Orders{payment(id)} to Payment{orders(id)}
+  AuthorizationCertificate{orders(id)} to Orders{authorizationCertificate(id)}
+}
+
+relationship ManyToOne {
+  Plugin{applicationUser(username)} to ApplicationUser
+  Payment{commodity(id)} to Commodity
+  Orders{commodity(id)} to Commodity
+}
