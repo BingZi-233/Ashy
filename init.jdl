@@ -10,7 +10,6 @@ application {
         devDatabaseType h2Memory
         prodDatabaseType postgresql
         cacheProvider caffeine
-        enableHibernateCache true
     }
     entities *
 }
