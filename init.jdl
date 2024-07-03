@@ -259,13 +259,13 @@ entity AuthorizationCertificate {
      */
     encryptionMethod EncryptionMethod required
     /**
-     * 公钥
+     * 公钥路径
      */
-    publicKey String required minlength(2048)
+    publicKeyPath String required
     /**
-     * 私钥
+     * 私钥路径
      */
-    privateKey String required minlength(2048)
+    privateKeyPath String required
 }
 
 /**
