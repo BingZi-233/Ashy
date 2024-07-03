@@ -249,7 +249,7 @@ entity AuthorizationCertificate {
     /**
      * ID
      */
-    id UUID required
+    id UUID required unique
     /**
      * 授权状态
      */
